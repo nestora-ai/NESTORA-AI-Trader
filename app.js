@@ -1,124 +1,111 @@
 
+const courses=[
+ {id:1,title:"مقدمة في التداول",level:"beginner",icon:"📈",hours:3,lessons:6,price:29,desc:"تعرف على معنى التداول والفرق بينه وبين الاستثمار وأنواع الأسواق.",topics:["ما هو التداول؟","الاستثمار مقابل التداول","أنواع الأسواق","أنواع الأوامر","المصطلحات الأساسية","اختبار تمهيدي"]},
+ {id:2,title:"أساسيات الأسواق المالية",level:"beginner",icon:"🌍",hours:4,lessons:7,price:39,desc:"فهم العملات والأسهم والمعادن والمؤشرات والعملات الرقمية.",topics:["الفوركس","الأسهم","المؤشرات","المعادن","الطاقة","العملات الرقمية","اختبار"]},
+ {id:3,title:"احتراف منصات التداول",level:"beginner",icon:"💻",hours:5,lessons:8,price:49,desc:"التعرف على MT5 وcTrader وXTB وطريقة تنفيذ الأوامر.",topics:["واجهة MT5","واجهة cTrader","واجهة XTB","أمر السوق","Stop وLimit","وقف الخسارة","جني الأرباح","اختبار"]},
+ {id:4,title:"إدارة رأس المال",level:"beginner",icon:"🛡️",hours:4,lessons:7,price:49,desc:"أهم دورة للمبتدئ لحماية رأس المال وإدارة المخاطر.",topics:["نسبة المخاطرة","حجم العقد","وقف الخسارة","RR","الحد اليومي","أمثلة تطبيقية","اختبار"]},
+ {id:5,title:"التحليل الفني",level:"intermediate",icon:"📊",hours:6,lessons:9,price:79,desc:"بناء قراءة منظمة للشارت والاتجاه والمناطق السعرية.",topics:["الاتجاه","القمم والقيعان","الدعم والمقاومة","الترند","النماذج","الفريمات","التأكيد","تطبيق","اختبار"]},
+ {id:6,title:"الشموع اليابانية",level:"intermediate",icon:"🕯️",hours:4,lessons:7,price:59,desc:"فهم تركيب الشمعة وأهم النماذج الانعكاسية والاستمرارية.",topics:["تركيب الشمعة","دوجي","ابتلاع","مطرقة","نجمة","السياق","اختبار"]},
+ {id:7,title:"المؤشرات الفنية",level:"intermediate",icon:"📉",hours:5,lessons:8,price:79,desc:"الاستخدام الصحيح لمؤشرات RSI وMACD وEMA وBollinger.",topics:["RSI","MACD","EMA","Bollinger","التباعد","الدمج","الأخطاء","اختبار"]},
+ {id:8,title:"علم نفس المتداول",level:"intermediate",icon:"🧠",hours:4,lessons:7,price:69,desc:"إدارة الخوف والطمع والتسرع والتداول الانتقامي.",topics:["الخوف","الطمع","التسرع","الانتقام","الانضباط","اليوميات","اختبار"]},
+ {id:9,title:"Price Action",level:"advanced",icon:"⚡",hours:7,lessons:10,price:129,desc:"قراءة حركة السعر دون الاعتماد المفرط على المؤشرات.",topics:["هيكل السوق","السياق","المناطق","الاختراق","إعادة الاختبار","الزخم","الدخول","الإدارة","تطبيق","اختبار"]},
+ {id:10,title:"Smart Money Concepts",level:"advanced",icon:"🏦",hours:8,lessons:10,price:149,desc:"مفاهيم السيولة والهيكل وOrder Blocks بصورة منظمة.",topics:["Liquidity","BOS","CHOCH","Order Blocks","FVG","Premium/Discount","Session","Entry Model","تطبيق","اختبار"]},
+ {id:11,title:"التداول أثناء الأخبار",level:"advanced",icon:"📰",hours:5,lessons:8,price:99,desc:"فهم الأخبار عالية التأثير والانزلاق والسبريد وإدارة المخاطر.",topics:["التقويم الاقتصادي","الفائدة","التضخم","الوظائف","السبريد","الانزلاق","الخطة","اختبار"]},
+ {id:12,title:"NESTORA AI Professional",level:"advanced",icon:"🤖",hours:5,lessons:8,price:99,desc:"استخدام NESTORA AI وسجل التداول ومحرك المخاطر بفاعلية.",topics:["لوحة التحكم","AI Copilot","محرك المخاطر","السجل","التوصيات","الأسواق","التنبيهات","اختبار"]}
+];
+
 const titles={
- dashboard:["لوحة التحكم","نظرة شاملة على الأداء والأسواق والمخاطر."],
- markets:["الأسواق الحية","مراقبة الأصول والبحث والتصفية."],
- chart:["الشارت الاحترافي","واجهة تحليل فني تفاعلية."],
- copilot:["NESTORA AI Copilot","مساعد ذكي لتقييم الصفقة والانضباط."],
- risk:["إدارة المخاطر","حساب حجم الصفقة وحدود الخسارة."],
- journal:["سجل التداول","تحليل الأداء والانضباط والمشاعر."],
- news:["الأخبار الاقتصادية","ملخصات تجريبية وتأثير السوق."],
- alerts:["التنبيهات","إنشاء تنبيهات محلية للأسعار والمؤشرات."],
- accounts:["الحسابات","الاستعداد لربط الوسطاء."],
- settings:["الإعدادات","المظهر وإدارة المنصة."]
+ dashboard:["لوحة التحكم","ملخص التداول والتعلم والتقدم."],markets:["الأسواق","قائمة مرنة قابلة للتوسع."],copilot:["NESTORA AI","مساعد تداول وتعليم."],risk:["إدارة المخاطر","حاسبة المخاطر."],journal:["سجل التداول","ربط الأداء بالتعلم."],academy:["NESTORA Academy","مكتبة الدورات والمسارات."],student:["لوحة الطالب","التقدم والإنجازات."],certificates:["الشهادات","شهادات إتمام الدورات."],subscriptions:["الاشتراكات","الباقات والمدفوعات."],settings:["الإعدادات","بيانات المستخدم."]
 };
 
-function showApp(){
- loginScreen.classList.add("hidden");app.classList.remove("hidden");
- localStorage.setItem("nestora_v5_logged","1");setTimeout(redrawCharts,60);
+const USER_KEY="nestora_v6_user",ENROLL_KEY="nestora_v6_enrollments",TRADE_KEY="nestora_v6_trades";
+const getUser=()=>JSON.parse(localStorage.getItem(USER_KEY)||"null");
+const getEnrollments=()=>JSON.parse(localStorage.getItem(ENROLL_KEY)||"[]");
+const getTrades=()=>JSON.parse(localStorage.getItem(TRADE_KEY)||"[]");
+
+function applyUser(){
+ const u=getUser(); if(!u)return;
+ sidebarName.textContent=u.name;sidebarEmail.textContent=u.email;
+ sidebarAvatar.textContent=(u.name.trim()[0]||"م").toUpperCase();topAvatar.textContent=(u.name.trim()[0]||"م").toUpperCase();
+ settingsName.value=u.name;settingsEmail.value=u.email;
 }
-loginForm.addEventListener("submit",e=>{e.preventDefault();showApp()});
-if(localStorage.getItem("nestora_v5_logged")==="1")showApp();
-logoutBtn.addEventListener("click",()=>{localStorage.removeItem("nestora_v5_logged");location.reload()});
-themeBtn.addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("nestora_theme",document.body.classList.contains("light")?"light":"dark");redrawCharts()});
-if(localStorage.getItem("nestora_theme")==="light")document.body.classList.add("light");
+function showApp(){loginScreen.classList.add("hidden");app.classList.remove("hidden");applyUser();renderAll()}
+loginForm.addEventListener("submit",e=>{e.preventDefault();localStorage.setItem(USER_KEY,JSON.stringify({name:loginName.value.trim(),email:loginEmail.value.trim()}));showApp()});
+if(getUser())showApp();
+logoutBtn.addEventListener("click",()=>{localStorage.removeItem(USER_KEY);location.reload()});
 
 function go(view){
- document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
- document.getElementById(view).classList.add("active");
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(view).classList.add("active");
  document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
- pageTitle.textContent=titles[view][0];pageSubtitle.textContent=titles[view][1];
- sidebar.classList.remove("open");window.scrollTo({top:0,behavior:"smooth"});
- if(view==="chart")setTimeout(redrawCharts,50);
+ pageTitle.textContent=titles[view][0];pageSubtitle.textContent=titles[view][1];sidebar.classList.remove("open");window.scrollTo(0,0)
 }
-document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.view)));
-document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
-menuBtn.addEventListener("click",()=>sidebar.classList.toggle("open"));
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>go(b.dataset.view));
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+menuBtn.onclick=()=>sidebar.classList.toggle("open");
 
-const marketData=[
- {symbol:"XAU/USD",name:"الذهب مقابل الدولار",category:"metals",price:"—",change:"+0.00%",dir:"up"},
- {symbol:"EUR/USD",name:"اليورو مقابل الدولار",category:"forex",price:"—",change:"+0.00%",dir:"up"},
- {symbol:"GBP/USD",name:"الجنيه مقابل الدولار",category:"forex",price:"—",change:"-0.00%",dir:"down"},
- {symbol:"BTC/USD",name:"بيتكوين",category:"crypto",price:"—",change:"+0.00%",dir:"up"},
- {symbol:"ETH/USD",name:"إيثريوم",category:"crypto",price:"—",change:"+0.00%",dir:"up"},
- {symbol:"NVDA",name:"NVIDIA",category:"stocks",price:"—",change:"+0.00%",dir:"up"},
- {symbol:"AAPL",name:"Apple",category:"stocks",price:"—",change:"-0.00%",dir:"down"},
- {symbol:"XAG/USD",name:"الفضة مقابل الدولار",category:"metals",price:"—",change:"+0.00%",dir:"up"}
-];
-watchlist.innerHTML=marketData.slice(0,5).map(a=>`<div class="watch-row"><div><b>${a.symbol}</b><small>${a.name}</small></div><div><b>${a.price}</b><small class="${a.dir}">${a.change}</small></div></div>`).join("");
+const marketNames=["XAU/USD","EUR/USD","GBP/USD","USD/JPY","BTC/USD","ETH/USD","NASDAQ","S&P 500","US Oil","Silver","AAPL","NVDA"];
+marketGrid.innerHTML=marketNames.map(x=>`<div class="market-card"><b>${x}</b><small>متاح عند ربط مصدر السوق أو حساب الوسيط</small></div>`).join("");
 
-function renderMarkets(filter="all",query=""){
- const q=query.toLowerCase();
- const list=marketData.filter(a=>(filter==="all"||a.category===filter)&&(a.symbol.toLowerCase().includes(q)||a.name.includes(query)));
- marketGrid.innerHTML=list.map((a,i)=>`<article class="market-card"><header><div><b>${a.symbol}</b><p>${a.name}</p></div><span class="${a.dir}">${a.change}</span></header><div class="market-price">${a.price}</div><canvas class="spark" data-spark="${i}" height="60"></canvas></article>`).join("");
- setTimeout(drawSparks,20);
+let activeLevel="all";
+function renderCourses(){
+ const q=courseSearch.value.toLowerCase();
+ const list=courses.filter(c=>(activeLevel==="all"||c.level===activeLevel)&&(c.title.toLowerCase().includes(q)||c.desc.includes(courseSearch.value)));
+ courseGrid.innerHTML=list.map(c=>{
+   const e=getEnrollments().find(x=>x.id===c.id);
+   return `<article class="course-card">
+    <div class="course-cover">${c.icon}</div>
+    <h3>${c.title}</h3><p>${c.desc}</p>
+    <div class="course-meta"><span>${c.lessons} دروس</span><span>${c.hours} ساعات</span></div>
+    ${e?`<div class="progress"><span style="width:${e.progress}%"></span></div><small>التقدم ${e.progress}%</small>`:`<div class="price">$${c.price}</div>`}
+    <button class="${e?'secondary-btn':'primary-btn'}" onclick="openCourse(${c.id})">${e?'متابعة الدورة':'عرض الدورة'}</button>
+   </article>`
+ }).join("")
 }
-renderMarkets();
-marketSearch.addEventListener("input",()=>renderMarkets(document.querySelector(".market-filters button.active").dataset.filter,marketSearch.value));
-document.querySelectorAll(".market-filters button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".market-filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderMarkets(b.dataset.filter,marketSearch.value)}));
+courseSearch.oninput=renderCourses;
+document.querySelectorAll(".course-filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".course-filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeLevel=b.dataset.level;renderCourses()});
 
-function getThemeColors(){
- const light=document.body.classList.contains("light");
- return {grid:light?"rgba(6,16,24,.08)":"rgba(255,255,255,.06)",bg:light?"#edf3f7":"#061018"};
+window.openCourse=id=>{
+ const c=courses.find(x=>x.id===id),e=getEnrollments().find(x=>x.id===id);
+ courseDetails.innerHTML=`<div class="course-cover" style="font-size:70px;text-align:center">${c.icon}</div><h2>${c.title}</h2><p>${c.desc}</p>
+ <div class="course-meta"><span>${c.lessons} دروس</span><span>${c.hours} ساعات</span><span>$${c.price}</span></div>
+ <h3>محتوى الدورة</h3><div class="lesson-list">${c.topics.map((t,i)=>`<div class="lesson-item"><span>${i+1}. ${t}</span><span>${e&&e.progress>i/c.topics.length*100?'✓':'○'}</span></div>`).join("")}</div>
+ <button class="primary-btn" onclick="${e?`advanceCourse(${id})`:`enrollCourse(${id})`}">${e?'إكمال درس تجريبي':'شراء وتسجيل تجريبي'}</button>`;
+ courseModal.classList.remove("hidden")
+};
+closeModal.onclick=()=>courseModal.classList.add("hidden");
+window.enrollCourse=id=>{const arr=getEnrollments();if(!arr.find(x=>x.id===id))arr.push({id,progress:0,completed:false});localStorage.setItem(ENROLL_KEY,JSON.stringify(arr));courseModal.classList.add("hidden");renderAll();alert("تم تسجيل الدورة تجريبيًا. الربط بالدفع سيُضاف لاحقًا.")};
+window.advanceCourse=id=>{const arr=getEnrollments(),e=arr.find(x=>x.id===id);e.progress=Math.min(100,e.progress+20);e.completed=e.progress===100;localStorage.setItem(ENROLL_KEY,JSON.stringify(arr));courseModal.classList.add("hidden");renderAll()};
+
+function renderStudent(){
+ const arr=getEnrollments();
+ studentCourses.innerHTML=arr.length?arr.map(e=>{const c=courses.find(x=>x.id===e.id);return `<div class="student-course"><div><b>${c.title}</b><small>${e.progress}% مكتمل</small></div><div class="progress"><span style="width:${e.progress}%"></span></div><button class="secondary-btn" onclick="openCourse(${c.id})">متابعة</button></div>`}).join(""):"<div class='empty-state'>لا توجد دورات مسجلة.</div>";
 }
-function drawLine(canvas,values){
- if(!canvas)return;const c=getThemeColors(),ctx=canvas.getContext("2d"),dpr=window.devicePixelRatio||1,w=canvas.clientWidth||700,h=canvas.getAttribute("height")|0;
- canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
- ctx.strokeStyle=c.grid;ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
- const min=Math.min(...values),max=Math.max(...values),pad=22,pts=values.map((v,i)=>[pad+(w-pad*2)*i/(values.length-1),h-pad-(h-pad*2)*(v-min)/(max-min||1)]);
- const grad=ctx.createLinearGradient(0,0,w,0);grad.addColorStop(0,"#627cff");grad.addColorStop(1,"#3edbd4");ctx.strokeStyle=grad;ctx.lineWidth=4;ctx.lineJoin="round";ctx.lineCap="round";ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.stroke();
- const fill=ctx.createLinearGradient(0,0,0,h);fill.addColorStop(0,"rgba(62,219,212,.20)");fill.addColorStop(1,"rgba(62,219,212,0)");ctx.lineTo(pts.at(-1)[0],h);ctx.lineTo(pts[0][0],h);ctx.closePath();ctx.fillStyle=fill;ctx.fill();
+function renderCertificates(){
+ const done=getEnrollments().filter(x=>x.completed);
+ certificateGrid.innerHTML=done.length?done.map(e=>{const c=courses.find(x=>x.id===e.id),u=getUser();return `<article class="certificate-card"><div class="certificate-seal">🏆</div><h3>شهادة إتمام</h3><p>${c.title}</p><b>${u.name}</b><small>NESTORA-${String(c.id).padStart(4,"0")}</small></article>`}).join(""):"<div class='card empty-state'>لم تحصل على شهادة بعد. أكمل أي دورة بنسبة 100%.</div>";
 }
-function drawSparks(){
- document.querySelectorAll("[data-spark]").forEach((c,i)=>drawLine(c,[10+i,13+i,11+i,15+i,18+i,17+i,21+i,23+i,22+i,26+i]));
+function updateDashboard(){
+ const arr=getEnrollments(),avg=arr.length?Math.round(arr.reduce((a,x)=>a+x.progress,0)/arr.length):0,done=arr.filter(x=>x.completed).length,hours=Math.round(arr.reduce((a,x)=>a+(courses.find(c=>c.id===x.id).hours*x.progress/100),0));
+ enrolledCount.textContent=arr.length;avgProgress.textContent=avg+"%";certificateCount.textContent=done;learningHours.textContent=hours;
+ if(arr.length){const e=arr[0],c=courses.find(x=>x.id===e.id);lastCourse.innerHTML=`<b>${c.title}</b><div class="progress"><span style="width:${e.progress}%"></span></div><small>${e.progress}% مكتمل</small>`}
+ const trades=getTrades(),mistakes=trades.map(x=>x.mistake);
+ learningRecommendation.textContent=mistakes.includes("مخاطرة مرتفعة")||mistakes.includes("عدم استخدام وقف الخسارة")?"نوصي بمراجعة دورة إدارة رأس المال قبل فتح صفقة جديدة.":mistakes.includes("دخول متسرع")?"نوصي بدورة علم نفس المتداول وتحسين الانضباط.":"ابدأ بدورة مقدمة في التداول ثم إدارة رأس المال.";
 }
-const perfSets={"1D":[20,24,22,29,35,33,42,47,45,55,58,57,66,70,72,80],"1W":[18,20,25,23,31,34,38,42,44,50,48,55,61,59,66,72],"1M":[12,18,16,22,26,30,35,33,40,46,49,54,58,63,68,74],"1Y":[8,12,10,17,20,24,30,36,41,45,52,58,62,67,71,78]};
-const marketSets={XAUUSD:[40,42,39,45,47,46,52,55,51,57,61,60,64,66],EURUSD:[50,48,49,47,51,54,53,57,56,59,61,60,62,64],GBPUSD:[55,52,54,49,51,48,50,53,51,55,57,54,58,60],BTCUSD:[35,41,38,44,50,47,55,52,58,62,57,65,63,70],NVDA:[25,28,27,33,36,40,38,45,48,46,52,55,59,63]};
-let perfRange="1D";function redrawCharts(){drawLine(performanceChart,perfSets[perfRange]);drawLine(marketChart,marketSets[marketSymbol.value]);drawSparks()}
-window.addEventListener("resize",redrawCharts);
-document.querySelectorAll(".range-tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".range-tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");perfRange=b.dataset.range;redrawCharts()}));
-marketSymbol.addEventListener("change",redrawCharts);
-
-const activeIndicators=new Set();
-document.querySelectorAll(".indicator-tabs button").forEach(b=>b.addEventListener("click",()=>{b.classList.toggle("active");b.classList.contains("active")?activeIndicators.add(b.dataset.indicator):activeIndicators.delete(b.dataset.indicator);indicatorStatus.textContent=activeIndicators.size?`المؤشرات المفعلة: ${[...activeIndicators].join("، ")}`:"لا توجد مؤشرات مفعلة."}));
-
-let botMode="analysis";
-document.querySelectorAll(".bot-modes button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".bot-modes button").forEach(x=>x.classList.remove("active"));b.classList.add("active");botMode=b.dataset.mode}));
-const extractNumbers=text=>(text.match(/\d+(?:\.\d+)?/g)||[]).map(Number);
-function aiReply(text){
- const t=text.toLowerCase(),nums=extractNumbers(text);
- if(botMode==="coach"){if(t.includes("انتقام")||t.includes("خسارة"))return "لا تحاولي تعويض الخسارة بصفقة أكبر. توقفي وراجعي السبب، ثم عودي فقط عند وجود صفقة تستوفي القواعد.";return "اكتبي خطة قبل الدخول، حددي الحد اليومي للخسارة، وسجلي السبب والمشاعر لكل صفقة."}
- if(botMode==="risk"||t.includes("حجم العقد")){if(nums.length>=4){const [balance,riskPct,stopPips,pipValue]=nums,loss=balance*riskPct/100,lot=loss/(stopPips*pipValue);return `أقصى خسارة $${loss.toFixed(2)}، وحجم العقد التقريبي ${lot.toFixed(2)} لوت. تحققي من قيمة النقطة للأصل.`}return "أرسلي: الرصيد، نسبة المخاطرة، وقف الخسارة بالنقاط، وقيمة النقطة لكل لوت."}
- if(nums.length>=3){const [entry,stop,target]=nums,rr=Math.abs(target-entry)/Math.abs(entry-stop);if(!isFinite(rr))return "تأكدي من اختلاف سعر الدخول ووقف الخسارة.";let score=Math.round(Math.min(95,Math.max(25,45+rr*18)));if(t.includes("خبر"))score-=15;if(t.includes("متسرع")||t.includes("خائف"))score-=10;return `نسبة العائد إلى المخاطرة تقريبًا 1:${rr.toFixed(2)}. تقييم الصفقة: ${score}/100. ${rr>=2?"النسبة جيدة مبدئيًا.":rr>=1.5?"النسبة مقبولة بحذر.":"النسبة ضعيفة وتحتاج تعديلًا."}`}
- if(t.includes("1:2")||t.includes("1 : 2"))return "نسبة 1:2 جيدة مبدئيًا. تقييمها النظري 80/100 قبل احتساب الاتجاه والأخبار وجودة نقطة الدخول.";
- if(t.includes("تقييم"))return "أرسلي الدخول، وقف الخسارة، الهدف، وهل توجد أخبار قوية أو مشاعر تسرع، وسأعطيك تقييمًا من 100.";
- return "أستطيع تقييم الصفقة، حساب المخاطرة، وتقديم توجيهات انضباطية. التحليل الحي سيُضاف عند ربط مصدر بيانات وخادم آمن.";
+function renderTrades(){
+ const arr=getTrades();tradeList.innerHTML=arr.length?arr.map(x=>`<div class="list-item"><b>${x.asset}</b> — ${x.result}<small>${x.mistake}</small></div>`).join(""):"<div class='empty-state'>لا توجد صفقات محفوظة.</div>"
 }
-function sendMessage(text){if(!text.trim())return;chat.insertAdjacentHTML("beforeend",`<div class="message user">${text}</div>`);setTimeout(()=>{chat.insertAdjacentHTML("beforeend",`<div class="message ai">${aiReply(text)}</div>`);chat.scrollTop=chat.scrollHeight},250);aiInput.value="";chat.scrollTop=chat.scrollHeight}
-sendAI.addEventListener("click",()=>sendMessage(aiInput.value));aiInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage(aiInput.value)}});document.querySelectorAll(".quick-prompts button").forEach(b=>b.addEventListener("click",()=>sendMessage(b.textContent)));
+saveTrade.onclick=()=>{if(!tradeAsset.value.trim())return alert("أدخل الأصل");const arr=getTrades();arr.unshift({asset:tradeAsset.value.trim(),result:tradeResult.value,mistake:tradeMistake.value,notes:tradeNotes.value});localStorage.setItem(TRADE_KEY,JSON.stringify(arr));tradeAsset.value="";tradeNotes.value="";renderAll()};
+calcRisk.onclick=()=>{const loss=(+balance.value||0)*(+riskPct.value||0)/100,lot=loss/((+stopPips.value||1)*(+pipValue.value||1));maxLoss.textContent="$"+loss.toFixed(2);lotSize.textContent=lot.toFixed(2)+" لوت"};
 
-function calcRiskFn(){const b=Math.max(0,+balance.value||0),r=Math.max(0,+riskPct.value||0),s=Math.max(1,+stopPips.value||1),p=Math.max(.01,+pipValue.value||.01),d=Math.max(0,+dailyLimit.value||0),o=Math.max(0,+openTrades.value||0),loss=b*r/100,lot=loss/(s*p),daily=b*d/100;maxLoss.textContent="$"+loss.toFixed(2);lotSize.textContent=lot.toFixed(2)+" لوت";dailyLoss.textContent="$"+daily.toFixed(2);let rule="مسموح",guide="المخاطرة الحالية منخفضة ومناسبة للمرحلة الأولى.";if(r>1||o>=3){rule="بحذر";guide="المخاطرة أو عدد الصفقات المفتوحة مرتفع نسبيًا."}if(r>2||o>=5){rule="مرفوض";guide="المخاطرة مرتفعة جدًا وفق قواعد NESTORA."}riskRule.textContent=rule;riskGuidance.textContent=guide}
-calcRisk.addEventListener("click",calcRiskFn);calcRiskFn();
+function aiReply(t){
+ if(t.includes("مبتدئ"))return "ابدأ بالترتيب: مقدمة في التداول، أساسيات الأسواق، احتراف المنصات، ثم إدارة رأس المال.";
+ if(t.includes("مخاطر"))return "إدارة المخاطر تعني تحديد نسبة خسارة صغيرة لكل صفقة، استخدام وقف الخسارة، وعدم تجاوز الحد اليومي.";
+ if(t.includes("خطة"))return "خطة مقترحة: أسبوع 1 مقدمة وأسواق، أسبوع 2 منصات، أسبوع 3 إدارة مخاطر، أسبوع 4 تطبيق وسجل تداول.";
+ return "يمكنني اقتراح دورة، شرح مفهوم، أو ربط خطأ متكرر في سجل التداول بدرس مناسب.";
+}
+function sendMessage(t){if(!t.trim())return;chat.insertAdjacentHTML("beforeend",`<div class="message user">${t}</div>`);setTimeout(()=>{chat.insertAdjacentHTML("beforeend",`<div class="message ai">${aiReply(t)}</div>`);chat.scrollTop=chat.scrollHeight},200);aiInput.value=""}
+sendAI.onclick=()=>sendMessage(aiInput.value);document.querySelectorAll(".quick-prompts button").forEach(b=>b.onclick=()=>sendMessage(b.textContent));
 
-const TRADE_KEY="nestora_v5_trades",getTrades=()=>JSON.parse(localStorage.getItem(TRADE_KEY)||"[]");
-function saveTradesData(d){localStorage.setItem(TRADE_KEY,JSON.stringify(d));renderTrades()}
-function renderTrades(){const d=getTrades();tradeRows.innerHTML=d.length?d.map(x=>`<tr><td>${x.date}</td><td>${x.asset}</td><td>${x.side}</td><td>${x.broker}</td><td>${x.pl.toFixed(2)}$</td><td>${x.outcome}</td><td>${x.rr.toFixed(1)}</td><td>${x.discipline}</td><td>${x.emotion}</td></tr>`).join(""):`<tr><td colspan="9" style="color:#91a6b7">لا توجد صفقات مسجلة بعد.</td></tr>`;const total=d.reduce((a,x)=>a+x.pl,0),wins=d.filter(x=>x.outcome==="رابحة").length,grossProfit=d.filter(x=>x.pl>0).reduce((a,x)=>a+x.pl,0),grossLoss=Math.abs(d.filter(x=>x.pl<0).reduce((a,x)=>a+x.pl,0)),rr=d.length?d.reduce((a,x)=>a+x.rr,0)/d.length:0;dashboardPL.textContent=(total>=0?"+":"")+"$"+total.toFixed(2);dashboardWin.textContent=d.length?Math.round(wins/d.length*100)+"%":"0%";profitFactor.textContent=grossLoss? (grossProfit/grossLoss).toFixed(2):(grossProfit>0?"∞":"0.00");avgRR.textContent=rr.toFixed(2)}
-saveTrade.addEventListener("click",()=>{const asset=jAsset.value.trim();if(!asset)return alert("أدخلي اسم الأصل");const d=getTrades();d.unshift({date:new Date().toLocaleDateString("ar-OM"),asset,side:jSide.value,broker:jBroker.value,pl:+jPL.value||0,outcome:jOutcome.value,discipline:jDiscipline.value,rr:+jRR.value||0,emotion:jEmotion.value,notes:jNotes.value.trim()});saveTradesData(d);jAsset.value="";jPL.value="";jNotes.value=""});
-clearTrades.addEventListener("click",()=>{if(confirm("هل تريدين مسح جميع الصفقات؟"))saveTradesData([])});
-exportCSV.addEventListener("click",()=>{const d=getTrades();if(!d.length)return alert("لا توجد بيانات للتصدير");const rows=[["التاريخ","الأصل","النوع","المنصة","النتيجة","الحالة","RR","الانضباط","المشاعر","الملاحظات"],...d.map(x=>[x.date,x.asset,x.side,x.broker,x.pl,x.outcome,x.rr,x.discipline,x.emotion,x.notes])],csv="\ufeff"+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n"),blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="nestora-v5-trading-journal.csv";a.click();URL.revokeObjectURL(url)});
-renderTrades();
+saveProfile.onclick=()=>{localStorage.setItem(USER_KEY,JSON.stringify({name:settingsName.value.trim(),email:settingsEmail.value.trim()}));applyUser();alert("تم حفظ البيانات محليًا.")};
 
-const newsItems=[
- {title:"قرار فائدة مرتقب",impact:"high",label:"تأثير مرتفع",body:"قد ترتفع تقلبات الدولار والذهب قرب وقت الإعلان. هذه بطاقة تجريبية وليست خبرًا حيًا."},
- {title:"بيانات تضخم",impact:"medium",label:"تأثير متوسط",body:"قد تؤثر بيانات التضخم على توقعات الفائدة واتجاه الدولار."},
- {title:"تحديث أسواق الأسهم",impact:"low",label:"تأثير منخفض",body:"ملخص تجريبي لحركة قطاع التكنولوجيا والمخاطر العامة."},
- {title:"مخزونات النفط",impact:"medium",label:"تأثير متوسط",body:"قد تؤثر البيانات على أسعار النفط والعملات المرتبطة بالطاقة."},
- {title:"تصريحات بنك مركزي",impact:"high",label:"تأثير مرتفع",body:"التصريحات المفاجئة قد تسبب حركة سريعة واتساعًا في السبريد."},
- {title:"ثقة المستهلك",impact:"low",label:"تأثير منخفض",body:"مؤشر اقتصادي مساعد لفهم قوة النشاط الاقتصادي."}
-];
-newsGrid.innerHTML=newsItems.map(n=>`<article class="news-card"><span class="impact ${n.impact}">${n.label}</span><h3>${n.title}</h3><p>${n.body}</p></article>`).join("");
-
-const ALERT_KEY="nestora_v5_alerts",getAlerts=()=>JSON.parse(localStorage.getItem(ALERT_KEY)||"[]");
-function renderAlerts(){const a=getAlerts();alertsList.innerHTML=a.length?a.map((x,i)=>`<div class="alert-item"><div><b>${x.name}</b><small>${x.asset} — ${x.condition} ${x.value}</small></div><button class="danger-btn" onclick="deleteAlert(${i})">حذف</button></div>`).join(""):`<div style="color:#91a6b7">لا توجد تنبيهات محفوظة.</div>`}
-window.deleteAlert=i=>{const a=getAlerts();a.splice(i,1);localStorage.setItem(ALERT_KEY,JSON.stringify(a));renderAlerts()};
-saveAlert.addEventListener("click",()=>{if(!alertValue.value)return alert("أدخلي قيمة التنبيه");const a=getAlerts();a.unshift({name:alertName.value.trim()||"تنبيه جديد",asset:alertAsset.value,condition:alertCondition.value,value:+alertValue.value});localStorage.setItem(ALERT_KEY,JSON.stringify(a));alertName.value="";alertValue.value="";renderAlerts()});
-renderAlerts();setTimeout(redrawCharts,80);
+function renderAll(){applyUser();renderCourses();renderStudent();renderCertificates();renderTrades();updateDashboard()}
