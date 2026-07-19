@@ -3,64 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NESTORA AI Trader v4.0</title>
-  <meta name="description" content="NESTORA AI Trader v4.0 — منصة احترافية لإدارة قرار التداول والمخاطر">
+  <title>NESTORA AI Trader v5.0</title>
+  <meta name="description" content="NESTORA AI Trader v5.0 — منصة احترافية متعددة الأدوات لإدارة التداول والمخاطر">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div id="loginScreen" class="login-screen">
   <div class="login-card">
-    <div class="login-brand">
-      <div class="brand-mark xl">N</div>
+    <div class="brand-row">
+      <div class="brand-mark big">N</div>
       <div>
         <h1>NESTORA AI Trader</h1>
         <p>Professional Trading Intelligence Platform</p>
       </div>
     </div>
     <div class="login-copy">
-      <span class="badge">الإصدار 4.0</span>
-      <h2>منصة احترافية لإدارة القرار قبل التداول.</h2>
-      <p>دخول تجريبي محلي لعرض النظام. لا يتم إرسال بيانات إلى خادم في هذه النسخة.</p>
+      <span class="version-badge">الإصدار 5.0</span>
+      <h2>محطة تداول ذكية بتجربة احترافية.</h2>
+      <p>دخول تجريبي محلي لعرض الإصدار. لا يتم إرسال بيانات إلى أي خادم.</p>
     </div>
     <form id="loginForm">
-      <label>البريد الإلكتروني
-        <input id="loginEmail" type="email" placeholder="name@example.com" required>
-      </label>
-      <label>كلمة المرور
-        <input id="loginPassword" type="password" placeholder="••••••••" required>
-      </label>
-      <button class="primary-btn full" type="submit">دخول تجريبي</button>
+      <label>البريد الإلكتروني<input id="loginEmail" type="email" placeholder="name@example.com" required></label>
+      <label>كلمة المرور<input id="loginPassword" type="password" placeholder="••••••••" required></label>
+      <button class="primary-btn full" type="submit">الدخول إلى المنصة</button>
     </form>
-    <small class="login-note">هذه شاشة واجهة فقط. نظام المستخدمين الحقيقي وقاعدة البيانات سيُضافان عند بناء الخادم.</small>
+    <small class="muted-note">نظام الحسابات الحقيقي وقاعدة البيانات سيُضافان عند بناء الخادم.</small>
   </div>
 </div>
 
 <div id="app" class="app-shell hidden">
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <div class="brand-row">
       <div class="brand-mark">N</div>
       <div>
         <strong>NESTORA AI</strong>
-        <small>Trader v4.0</small>
+        <small>Trader v5.0</small>
       </div>
     </div>
 
-    <div class="workspace">Professional Workspace</div>
+    <div class="workspace-label">PROFESSIONAL TERMINAL</div>
 
     <nav class="nav">
       <button class="nav-item active" data-view="dashboard"><span>⌂</span>لوحة التحكم</button>
-      <button class="nav-item" data-view="terminal"><span>◫</span>محطة الأسواق</button>
-      <button class="nav-item" data-view="copilot"><span>✦</span>الروبوت الذكي</button>
-      <button class="nav-item" data-view="risk"><span>◈</span>محرك المخاطر</button>
+      <button class="nav-item" data-view="markets"><span>◫</span>الأسواق الحية</button>
+      <button class="nav-item" data-view="chart"><span>⌁</span>الشارت الاحترافي</button>
+      <button class="nav-item" data-view="copilot"><span>✦</span>NESTORA AI</button>
+      <button class="nav-item" data-view="risk"><span>◈</span>إدارة المخاطر</button>
       <button class="nav-item" data-view="journal"><span>▤</span>سجل التداول</button>
-      <button class="nav-item" data-view="portfolio"><span>◉</span>المحفظة</button>
-      <button class="nav-item" data-view="connections"><span>⛓</span>الربط</button>
+      <button class="nav-item" data-view="news"><span>◍</span>الأخبار الاقتصادية</button>
+      <button class="nav-item" data-view="alerts"><span>🔔</span>التنبيهات</button>
+      <button class="nav-item" data-view="accounts"><span>⛓</span>الحسابات</button>
       <button class="nav-item" data-view="settings"><span>⚙</span>الإعدادات</button>
     </nav>
 
     <div class="sidebar-bottom">
       <div class="security-card">
-        <b>حماية الحساب</b>
+        <b>وضع الأمان</b>
         <p>لا تُدخل كلمات مرور الوسطاء أو رموز التحقق داخل المنصة.</p>
       </div>
       <button id="logoutBtn" class="logout-btn">تسجيل الخروج</button>
@@ -72,10 +70,11 @@
       <button class="menu-btn" id="menuBtn">☰</button>
       <div>
         <h1 id="pageTitle">لوحة التحكم</h1>
-        <p id="pageSubtitle">نظرة شاملة على الأداء والمخاطر والأسواق.</p>
+        <p id="pageSubtitle">نظرة شاملة على الأداء والأسواق والمخاطر.</p>
       </div>
       <div class="top-actions">
-        <span class="status-pill">● النظام يعمل محليًا</span>
+        <span class="status-pill">● بيانات تجريبية</span>
+        <button class="icon-btn" id="themeBtn" title="تبديل المظهر">◐</button>
         <button class="icon-btn" title="الإشعارات">🔔</button>
         <button class="avatar">آ</button>
       </div>
@@ -84,30 +83,32 @@
     <section class="view active" id="dashboard">
       <div class="hero card">
         <div class="hero-copy">
-          <span class="eyebrow">NESTORA PROFESSIONAL</span>
-          <h2>منصة واحدة لإدارة الأسواق، المخاطر، والقرارات.</h2>
-          <p>واجهة احترافية متعددة الصفحات، مجهزة للانتقال لاحقًا إلى بيانات سوق حية، خادم ذكاء اصطناعي، وربط حسابات التداول بصلاحيات آمنة.</p>
+          <span class="eyebrow">NESTORA PROFESSIONAL v5</span>
+          <h2>تحليل، مخاطر، أخبار، وتنبيهات في منصة واحدة.</h2>
+          <p>الإصدار الخامس يوسّع المشروع إلى محطة تداول متكاملة بواجهة عالمية، شارت أكثر تطورًا، روبوت ذكي، تنبيهات، أخبار، وسجل احترافي.</p>
           <div class="hero-actions">
-            <button class="primary-btn" data-go="copilot">تشغيل الروبوت الذكي</button>
-            <button class="secondary-btn" data-go="risk">فحص المخاطرة</button>
+            <button class="primary-btn" data-go="copilot">اسأل NESTORA AI</button>
+            <button class="secondary-btn" data-go="chart">فتح الشارت</button>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="pulse-ring"><div class="ai-core">AI</div></div>
+          <div class="orb"><div class="orb-core">AI</div></div>
         </div>
       </div>
 
       <div class="kpi-grid">
-        <article class="card kpi"><span>الرصيد المتصل</span><strong>$0.00</strong><small>بانتظار الربط</small></article>
-        <article class="card kpi"><span>الربح والخسارة</span><strong id="dashboardPL">$0.00</strong><small>من السجل المحلي</small></article>
+        <article class="card kpi"><span>Equity</span><strong>$0.00</strong><small>بانتظار ربط الحساب</small></article>
+        <article class="card kpi"><span>الربح والخسارة</span><strong id="dashboardPL">$0.00</strong><small>من سجل التداول</small></article>
         <article class="card kpi"><span>نسبة النجاح</span><strong id="dashboardWin">0%</strong><small>الصفقات الرابحة</small></article>
-        <article class="card kpi"><span>مؤشر المخاطر</span><strong id="riskScore">منخفض</strong><small>حسب الإعداد الحالي</small></article>
+        <article class="card kpi"><span>Profit Factor</span><strong id="profitFactor">0.00</strong><small>محسوب من السجل</small></article>
+        <article class="card kpi"><span>Average RR</span><strong id="avgRR">0.00</strong><small>متوسط العائد للمخاطرة</small></article>
+        <article class="card kpi"><span>Drawdown</span><strong>0%</strong><small>بانتظار البيانات</small></article>
       </div>
 
       <div class="dashboard-grid">
         <article class="card performance-card">
           <div class="card-head">
-            <div><h3>منحنى الأداء</h3><p>رسم تفاعلي محلي حتى ربط البيانات الفعلية.</p></div>
+            <div><h3>منحنى الأداء</h3><p>رسم تفاعلي تجريبي حتى ربط البيانات الحقيقية.</p></div>
             <div class="range-tabs">
               <button class="active" data-range="1D">1D</button>
               <button data-range="1W">1W</button>
@@ -119,35 +120,47 @@
         </article>
 
         <article class="card watchlist-card">
-          <div class="card-head"><div><h3>قائمة المراقبة</h3><p>قيم تجريبية للواجهة.</p></div></div>
+          <div class="card-head"><div><h3>قائمة المراقبة</h3><p>محاكاة مرئية للأسعار.</p></div></div>
           <div id="watchlist" class="watchlist"></div>
         </article>
 
-        <article class="card risk-overview">
-          <div class="card-head"><div><h3>ملخص المخاطر</h3><p>القواعد الأساسية.</p></div></div>
-          <div class="risk-meter">
-            <div class="meter-track"><span style="width:28%"></span></div>
-            <div class="meter-labels"><span>منخفض</span><span>متوسط</span><span>مرتفع</span></div>
+        <article class="card score-card">
+          <div class="card-head"><div><h3>مؤشر الجاهزية</h3><p>مستوى انضباط المنصة.</p></div></div>
+          <div class="score-wrap">
+            <div class="score-ring"><span id="readinessScore">72</span></div>
+            <div class="score-info">
+              <b>جاهزية جيدة</b>
+              <p>استمري باستخدام إدارة المخاطر وسجل التداول.</p>
+            </div>
           </div>
-          <ul class="compact-list">
-            <li>المخاطرة الافتراضية: 0.5%</li>
-            <li>العائد الأدنى المفضل: 1:1.5</li>
-            <li>الأخبار القوية: توقف مؤقت</li>
-          </ul>
         </article>
 
         <article class="card connections-overview">
-          <div class="card-head"><div><h3>الوسطاء</h3><p>استعداد الربط.</p></div></div>
+          <div class="card-head"><div><h3>حالة الربط</h3><p>جاهزية الوسطاء.</p></div></div>
           <div class="connection-mini-grid">
             <div><b>cTrader</b><span class="pending">بانتظار OAuth</span></div>
             <div><b>Exness MT5</b><span class="pending">بانتظار Backend</span></div>
-            <div><b>XTB</b><span class="ready">إدخال يدوي</span></div>
+            <div><b>XTB</b><span class="ready">متابعة يدوية</span></div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="view" id="terminal">
+    <section class="view" id="markets">
+      <div class="market-toolbar card">
+        <div class="search-box"><input id="marketSearch" placeholder="ابحثي عن أصل..."></div>
+        <div class="market-filters">
+          <button class="active" data-filter="all">الكل</button>
+          <button data-filter="forex">عملات</button>
+          <button data-filter="metals">معادن</button>
+          <button data-filter="crypto">رقمية</button>
+          <button data-filter="stocks">أسهم</button>
+        </div>
+      </div>
+      <div id="marketGrid" class="market-grid"></div>
+    </section>
+
+    <section class="view" id="chart">
       <div class="terminal-grid">
         <article class="card chart-terminal">
           <div class="terminal-toolbar">
@@ -161,17 +174,24 @@
             <div class="timeframe-tabs">
               <button class="active">1m</button><button>5m</button><button>15m</button><button>1H</button><button>4H</button><button>1D</button>
             </div>
+            <div class="indicator-tabs">
+              <button data-indicator="ema">EMA</button>
+              <button data-indicator="rsi">RSI</button>
+              <button data-indicator="macd">MACD</button>
+              <button data-indicator="bb">Bollinger</button>
+            </div>
           </div>
-          <canvas id="marketChart" height="430"></canvas>
+          <canvas id="marketChart" height="460"></canvas>
+          <div id="indicatorStatus" class="indicator-status">لا توجد مؤشرات مفعلة.</div>
         </article>
-        <aside class="card market-insights">
-          <div class="card-head"><div><h3>ملخص الأصل</h3><p>تحليل واجهة تجريبي.</p></div></div>
+        <aside class="card chart-side">
+          <div class="card-head"><div><h3>تحليل فني</h3><p>بيانات تجريبية.</p></div></div>
           <div class="metric-list">
             <div><span>الاتجاه</span><b>محايد</b></div>
             <div><span>RSI</span><b>52</b></div>
+            <div><span>MACD</span><b>محايد</b></div>
             <div><span>التذبذب</span><b>متوسط</b></div>
-            <div><span>الأخبار</span><b>غير متصل</b></div>
-            <div><span>قرار الروبوت</span><b>انتظار</b></div>
+            <div><span>تقييم NESTORA</span><b>انتظار</b></div>
           </div>
         </aside>
       </div>
@@ -182,45 +202,47 @@
         <article class="card copilot-panel">
           <div class="copilot-head">
             <div class="copilot-logo">✦</div>
-            <div><h3>NESTORA Trading Copilot</h3><p>روبوت مساعد لاتخاذ قرار أكثر انضباطًا.</p></div>
+            <div><h3>NESTORA AI Copilot</h3><p>مساعد ذكي لمراجعة الصفقة والانضباط والمخاطر.</p></div>
           </div>
 
           <div class="bot-modes">
             <button class="active" data-mode="analysis">تحليل صفقة</button>
             <button data-mode="risk">إدارة المخاطر</button>
             <button data-mode="coach">مدرب تداول</button>
-            <button data-mode="review">مراجعة قرار</button>
+            <button data-mode="review">تقييم من 100</button>
           </div>
 
           <div id="chat" class="chat">
             <div class="message ai">
-              مرحبًا آمنة. أنا الروبوت الذكي المساعد. يمكنني حاليًا تقييم نسب المخاطرة، مراجعة صفقة، وشرح قواعد التداول الآمن. لا أقرأ السوق حيًا بعد، ولا أنفذ أوامر تداول.
+              مرحبًا آمنة. يمكنني تقييم نسبة العائد إلى المخاطرة، تقدير حجم العقد، تقييم جودة الصفقة من 100، ومراجعة الانضباط. لا أقرأ السوق حيًا ولا أنفذ صفقات.
             </div>
           </div>
 
           <div class="quick-prompts">
             <button>قيّم صفقة بنسبة 1:2</button>
-            <button>ما حجم العقد المناسب؟</button>
-            <button>راجع انضباطي في التداول</button>
+            <button>احسب حجم العقد</button>
+            <button>أعطني تقييمًا من 100</button>
+            <button>راجع انضباطي</button>
           </div>
 
           <div class="chat-input">
-            <textarea id="aiInput" placeholder="مثال: شراء ذهب، دخول 2400، وقف 2385، هدف 2435، رصيد 1000 دولار"></textarea>
+            <textarea id="aiInput" placeholder="مثال: شراء ذهب، دخول 2400، وقف 2385، هدف 2435، رصيد 1000، مخاطرة 0.5%"></textarea>
             <button id="sendAI" class="primary-btn">إرسال</button>
           </div>
         </article>
 
         <aside class="card copilot-side">
-          <h3>ماذا يفعل الروبوت الآن؟</h3>
+          <h3>قدرات الإصدار 5.0</h3>
           <div class="capability-list">
             <div><span>✓</span>حساب العائد إلى المخاطرة</div>
             <div><span>✓</span>تقدير حجم العقد</div>
-            <div><span>✓</span>تحذير من المخاطر المرتفعة</div>
-            <div><span>✓</span>تقييم الانضباط</div>
-            <div class="disabled"><span>○</span>قراءة أسعار حية</div>
-            <div class="disabled"><span>○</span>تنفيذ صفقات</div>
+            <div><span>✓</span>تقييم الصفقة من 100</div>
+            <div><span>✓</span>توجيهات نفسية وانضباطية</div>
+            <div><span>✓</span>تحذيرات المخاطر</div>
+            <div class="disabled"><span>○</span>تحليل السوق الحي</div>
+            <div class="disabled"><span>○</span>تنفيذ أوامر التداول</div>
           </div>
-          <div class="warning-box">الروبوت مساعد قرار فقط. التنفيذ يبقى بيد المستخدم.</div>
+          <div class="warning-box">الروبوت مساعد قرار فقط، وليس بديلًا عن قرار المستخدم.</div>
         </aside>
       </div>
     </section>
@@ -228,7 +250,7 @@
     <section class="view" id="risk">
       <div class="risk-layout">
         <article class="card form-card">
-          <div class="card-head"><div><h3>Smart Risk Engine</h3><p>محرك احترافي لحساب حجم الصفقة وحدود الخسارة.</p></div></div>
+          <div class="card-head"><div><h3>Smart Risk Engine</h3><p>حساب حجم الصفقة وحدود الخسارة.</p></div></div>
           <div class="form-grid">
             <label>رصيد الحساب ($)<input id="balance" type="number" value="1000"></label>
             <label>نسبة المخاطرة (%)<input id="riskPct" type="number" value="0.5" step="0.1"></label>
@@ -245,7 +267,6 @@
             <div><span>قرار النظام</span><b id="riskRule">مسموح</b></div>
           </div>
         </article>
-
         <aside class="card risk-guidance">
           <h3>توجيهات ذكية</h3>
           <div id="riskGuidance" class="guidance-box">المخاطرة الحالية منخفضة ومناسبة للمرحلة الأولى.</div>
@@ -256,7 +277,7 @@
     <section class="view" id="journal">
       <div class="journal-grid">
         <article class="card form-card">
-          <div class="card-head"><div><h3>إضافة صفقة</h3><p>سجل مهني لتحليل الأداء لاحقًا.</p></div></div>
+          <div class="card-head"><div><h3>إضافة صفقة</h3><p>سجل احترافي لتحليل الأداء.</p></div></div>
           <div class="form-grid">
             <label>الأصل<input id="jAsset" placeholder="XAU/USD"></label>
             <label>المنصة<select id="jBroker"><option>Fiper cTrader</option><option>Exness MT5</option><option>XTB</option></select></label>
@@ -264,8 +285,10 @@
             <label>النتيجة بالدولار<input id="jPL" type="number" step="0.01"></label>
             <label>الحالة<select id="jOutcome"><option>رابحة</option><option>خاسرة</option><option>تعادل</option></select></label>
             <label>درجة الانضباط<select id="jDiscipline"><option>ممتاز</option><option>جيد</option><option>ضعيف</option></select></label>
+            <label>نسبة RR<input id="jRR" type="number" step="0.1" value="2"></label>
+            <label>المشاعر<select id="jEmotion"><option>هادئة</option><option>متوترة</option><option>متسرعة</option><option>واثقة</option></select></label>
           </div>
-          <label>الملاحظات<textarea id="jNotes" placeholder="سبب الدخول، سبب الخروج، الأخطاء، والدرس المستفاد"></textarea></label>
+          <label>الملاحظات<textarea id="jNotes" placeholder="سبب الدخول، الخروج، الأخطاء، والدرس المستفاد"></textarea></label>
           <button class="primary-btn" id="saveTrade">حفظ الصفقة</button>
         </article>
 
@@ -276,7 +299,7 @@
           </div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>التاريخ</th><th>الأصل</th><th>النوع</th><th>المنصة</th><th>النتيجة</th><th>الحالة</th><th>الانضباط</th></tr></thead>
+              <thead><tr><th>التاريخ</th><th>الأصل</th><th>النوع</th><th>المنصة</th><th>النتيجة</th><th>الحالة</th><th>RR</th><th>الانضباط</th><th>المشاعر</th></tr></thead>
               <tbody id="tradeRows"></tbody>
             </table>
           </div>
@@ -284,21 +307,30 @@
       </div>
     </section>
 
-    <section class="view" id="portfolio">
-      <div class="portfolio-grid">
-        <article class="card portfolio-card">
-          <div class="card-head"><div><h3>ملخص المحفظة</h3><p>جاهز للربط المستقبلي.</p></div></div>
-          <div class="portfolio-empty">
-            <div class="empty-icon">◉</div>
-            <h3>لا توجد حسابات متصلة</h3>
-            <p>عند ربط cTrader أو MT5 ستظهر هنا الأرصدة، الهامش، الصفقات المفتوحة، والأداء.</p>
-            <button class="secondary-btn" data-go="connections">فتح صفحة الربط</button>
+    <section class="view" id="news">
+      <div class="news-grid" id="newsGrid"></div>
+    </section>
+
+    <section class="view" id="alerts">
+      <div class="alerts-layout">
+        <article class="card form-card">
+          <div class="card-head"><div><h3>إنشاء تنبيه</h3><p>تنبيهات محلية داخل المتصفح.</p></div></div>
+          <div class="form-grid">
+            <label>الأصل<select id="alertAsset"><option>XAU/USD</option><option>EUR/USD</option><option>BTC/USD</option><option>NVDA</option></select></label>
+            <label>نوع الشرط<select id="alertCondition"><option>أعلى من</option><option>أقل من</option><option>RSI أعلى من</option><option>RSI أقل من</option></select></label>
+            <label>القيمة<input id="alertValue" type="number" step="0.01"></label>
+            <label>اسم التنبيه<input id="alertName" placeholder="تنبيه الذهب"></label>
           </div>
+          <button class="primary-btn" id="saveAlert">حفظ التنبيه</button>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><h3>التنبيهات المحفوظة</h3><p>محفوظة محليًا.</p></div></div>
+          <div id="alertsList" class="alerts-list"></div>
         </article>
       </div>
     </section>
 
-    <section class="view" id="connections">
+    <section class="view" id="accounts">
       <div class="connection-grid">
         <article class="card connect-card">
           <div class="connect-logo">cT</div><h3>cTrader Open API</h3>
@@ -307,12 +339,12 @@
         </article>
         <article class="card connect-card">
           <div class="connect-logo">MT5</div><h3>Exness MT5</h3>
-          <p>يتطلب Windows أو VPS وتشغيل MT5 مع خدمة Backend آمنة.</p>
+          <p>يتطلب Windows أو VPS وخدمة Backend آمنة.</p>
           <button class="secondary-btn">بانتظار الخادم</button>
         </article>
         <article class="card connect-card">
           <div class="connect-logo">XTB</div><h3>XTB</h3>
-          <p>المتابعة اليدوية متاحة حاليًا من خلال سجل التداول.</p>
+          <p>المتابعة اليدوية متاحة من خلال سجل التداول.</p>
           <button class="secondary-btn" data-go="journal">فتح السجل</button>
         </article>
       </div>
@@ -320,18 +352,17 @@
 
     <section class="view" id="settings">
       <article class="card settings-card">
-        <div class="card-head"><div><h3>إعدادات المنصة</h3><p>إعدادات الواجهة وإدارة المخاطر.</p></div></div>
-        <div class="setting-row"><div><b>المخاطرة الافتراضية</b><span>القيمة المرجعية للمبتدئ.</span></div><input id="defaultRisk" type="number" value="0.5" step="0.1"></div>
-        <div class="setting-row"><div><b>حد الخسارة اليومية</b><span>تنبيه عند الاقتراب من الحد.</span></div><input type="number" value="2" step="0.1"></div>
-        <div class="setting-row"><div><b>اللغة</b><span>اللغة الحالية للواجهة.</span></div><select><option>العربية</option><option disabled>English — قريبًا</option></select></div>
-        <div class="setting-row"><div><b>وضع الروبوت</b><span>يبقى في وضع المساعدة فقط.</span></div><select><option>مساعد قرار</option><option disabled>تنفيذ تلقائي — غير متاح</option></select></div>
+        <div class="card-head"><div><h3>إعدادات المنصة</h3><p>المظهر وإدارة المخاطر.</p></div></div>
+        <div class="setting-row"><div><b>المخاطرة الافتراضية</b><span>القيمة المرجعية.</span></div><input type="number" value="0.5" step="0.1"></div>
+        <div class="setting-row"><div><b>حد الخسارة اليومية</b><span>التنبيه عند الاقتراب من الحد.</span></div><input type="number" value="2" step="0.1"></div>
+        <div class="setting-row"><div><b>اللغة</b><span>العربية مفعلة حاليًا.</span></div><select><option>العربية</option><option disabled>English — قريبًا</option></select></div>
+        <div class="setting-row"><div><b>وضع الروبوت</b><span>مساعد قرار فقط.</span></div><select><option>مساعد قرار</option><option disabled>تنفيذ تلقائي — غير متاح</option></select></div>
       </article>
     </section>
 
-    <footer>NESTORA AI Trader v4.0 — Professional Interface & Smart Trading Copilot.</footer>
+    <footer>NESTORA AI Trader v5.0 — Professional Trading Terminal & AI Copilot.</footer>
   </main>
 </div>
-
 <script src="app.js"></script>
 </body>
 </html>
