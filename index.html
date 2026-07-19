@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NESTORA AI Trader</title>
+<meta name="description" content="مساعد تداول ذكي لإدارة المخاطر وتقييم الصفقات وتسجيل الأداء"/>
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1a2b;--panel2:#10223a;--line:#203654;
+  --text:#f4f7fb;--muted:#98a8bd;--primary:#7c6cff;--primary2:#45d0c8;
+  --good:#31c48d;--bad:#ff6b6b;--warn:#f5b942;--white:#fff;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif;background:
+radial-gradient(circle at top right,#162c52 0,transparent 35%),var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.shell{min-height:100vh;display:grid;grid-template-columns:260px 1fr}
+.sidebar{padding:22px 16px;border-left:1px solid var(--line);background:rgba(7,17,31,.94);position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding:10px}
+.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--primary2));font-weight:900}
+.brand h2{font-size:18px;margin:0}.brand small{color:var(--muted)}
+.nav{margin-top:24px;display:grid;gap:8px}
+.nav button{border:0;background:transparent;color:var(--muted);text-align:right;padding:13px 14px;border-radius:12px}
+.nav button.active,.nav button:hover{background:#172845;color:#fff}
+.safe{margin-top:25px;background:#101f34;border:1px solid var(--line);border-radius:16px;padding:14px;color:var(--muted);font-size:13px;line-height:1.7}
+.main{padding:22px;max-width:1400px;width:100%;margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.topbar h1{margin:0;font-size:26px}.topbar p{margin:5px 0;color:var(--muted)}
+.pill{padding:8px 12px;border-radius:999px;background:rgba(49,196,141,.12);color:var(--good);border:1px solid rgba(49,196,141,.28);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:linear-gradient(180deg,rgba(16,34,58,.96),rgba(13,26,43,.96));border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 35px rgba(0,0,0,.2)}
+.kpi{grid-column:span 3}.kpi span{color:var(--muted);font-size:14px}.kpi strong{font-size:27px;display:block;margin-top:8px}.kpi small{color:var(--primary2)}
+.large{grid-column:span 8}.sidecard{grid-column:span 4}
+.section{display:none}.section.active{display:block}
+h3{margin:0 0 15px}.muted{color:var(--muted)}
+.accounts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.account{padding:15px;background:#0b1728;border:1px solid var(--line);border-radius:15px}
+.account .status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px;margin-top:12px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--warn)}.dot.good{background:var(--good)}
+.btn{border:0;padding:11px 14px;border-radius:12px;font-weight:700}
+.btn-primary{background:linear-gradient(135deg,var(--primary),#5b8cff);color:#fff}
+.btn-soft{background:#182c49;color:#dce7f5}
+.btn-danger{background:rgba(255,107,107,.12);color:var(--bad)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#091626;color:#fff;border-radius:12px;padding:12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)}
+textarea{min-height:90px;resize:vertical}
+.results{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}
+.result{padding:14px;background:#0a1728;border-radius:14px;border:1px solid var(--line)}
+.result span{color:var(--muted);font-size:13px}.result b{display:block;font-size:20px;margin-top:6px}
+.signal{margin-top:14px;border-right:5px solid var(--warn)}.signal.good{border-right-color:var(--good)}.signal.bad{border-right-color:var(--bad)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:12px;border-bottom:1px solid var(--line);text-align:right;font-size:14px}th{color:var(--muted)}
+.table-wrap{overflow:auto}
+.hero{grid-column:span 12;padding:22px;background:linear-gradient(135deg,rgba(124,108,255,.22),rgba(69,208,200,.12));border:1px solid rgba(124,108,255,.35)}
+.hero h2{margin:0 0 8px}.hero p{color:#c9d5e6;max-width:850px;line-height:1.8}
+.progress{height:9px;background:#091626;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;width:28%;background:linear-gradient(90deg,var(--primary),var(--primary2))}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
+.mobile-menu{display:none}
+@media(max-width:960px){
+ .shell{grid-template-columns:1fr}.sidebar{display:none}.main{padding:14px}
+ .mobile-menu{display:flex;gap:8px;overflow:auto;margin-bottom:14px}
+ .mobile-menu button{white-space:nowrap;border:0;background:#13243c;color:#fff;padding:10px 12px;border-radius:10px}
+ .kpi{grid-column:span 6}.large,.sidecard{grid-column:span 12}.accounts{grid-template-columns:1fr}
+}
+@media(max-width:600px){.kpi{grid-column:span 12}.form-grid,.results{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">N</div><div><h2>NESTORA AI</h2><small>Trader v1.0</small></div></div>
+  <div class="nav">
+    <button class="active" onclick="go('dashboard',this)">لوحة التحكم</button>
+    <button onclick="go('risk',this)">حاسبة المخاطر</button>
+    <button onclick="go('analysis',this)">تقييم الصفقة</button>
+    <button onclick="go('journal',this)">سجل الصفقات</button>
+    <button onclick="go('accounts',this)">الحسابات</button>
+  </div>
+  <div class="safe">لا تدخلي كلمات مرور التداول أو رموز التحقق. الربط الحقيقي سيستخدم لاحقًا OAuth وصلاحيات قراءة فقط.</div>
+</aside>
+
+<main class="main">
+  <div class="mobile-menu">
+    <button onclick="go('dashboard')">الرئيسية</button><button onclick="go('risk')">المخاطر</button>
+    <button onclick="go('analysis')">التقييم</button><button onclick="go('journal')">السجل</button><button onclick="go('accounts')">الحسابات</button>
+  </div>
+  <div class="topbar">
+    <div><h1>NESTORA AI Trader</h1><p>منصة ذكية لإدارة القرار قبل التداول، وليست أداة تنفيذ آلي.</p></div>
+    <div class="pill">● النظام يعمل محليًا</div>
+  </div>
+
+  <section id="dashboard" class="section active">
+    <div class="grid">
+      <div class="card hero"><h2>مرحبًا بك في النسخة الاحترافية الأولى</h2><p>هذه النسخة تجمع إدارة المخاطر، تقييم جودة الصفقة، متابعة الحسابات، وسجل الأداء في مكان واحد. البيانات محفوظة داخل متصفحك فقط.</p><div class="progress"><i></i></div></div>
+      <div class="card kpi"><span>عدد الصفقات</span><strong id="kCount">0</strong><small>مسجلة محليًا</small></div>
+      <div class="card kpi"><span>إجمالي النتائج</span><strong id="kPL">$0.00</strong><small>ربح / خسارة</small></div>
+      <div class="card kpi"><span>نسبة النجاح</span><strong id="kWin">0%</strong><small>صفقات رابحة</small></div>
+      <div class="card kpi"><span>حد المخاطرة</span><strong>0.5%</strong><small>مقترح للمبتدئ</small></div>
+      <div class="card large"><h3>الحسابات المتابعة</h3><div class="accounts">
+        <div class="account"><b>Fiper cTrader</b><p class="muted">حساب Live</p><div class="status"><i class="dot"></i>إدخال يدوي حاليًا</div></div>
+        <div class="account"><b>Exness MT5</b><p class="muted">Standard</p><div class="status"><i class="dot"></i>بانتظار الربط</div></div>
+        <div class="account"><b>XTB</b><p class="muted">متابعة خارجية</p><div class="status"><i class="dot good"></i>جاهز للتسجيل اليدوي</div></div>
+      </div></div>
+      <div class="card sidecard"><h3>قواعد NESTORA</h3><p class="muted">لا صفقة بدون وقف خسارة.</p><p class="muted">لا مخاطرة أعلى من 0.5% في البداية.</p><p class="muted">تجنب الدخول وقت الأخبار القوية.</p><p class="muted">العائد إلى المخاطرة لا يقل عن 1.5.</p></div>
+    </div>
+  </section>
+
+  <section id="risk" class="section"><div class="card"><h3>حاسبة المخاطر</h3>
+    <div class="form-grid">
+      <div><label>رصيد الحساب ($)</label><input id="balance" type="number" value="1000"></div>
+      <div><label>نسبة المخاطرة (%)</label><input id="riskPct" type="number" value="0.5" step="0.1"></div>
+      <div><label>وقف الخسارة بالنقاط</label><input id="stopPips" type="number" value="50"></div>
+      <div><label>قيمة النقطة لكل لوت ($)</label><input id="pipValue" type="number" value="10" step="0.01"></div>
+    </div><button class="btn btn-primary" style="margin-top:14px" onclick="calcRisk()">احسب المخاطرة</button>
+    <div class="results"><div class="result"><span>أقصى خسارة</span><b id="maxLoss">$5.00</b></div>
+    <div class="result"><span>حجم العقد التقريبي</span><b id="lotSize">0.01</b></div>
+    <div class="result"><span>التصنيف</span><b id="riskClass">منخفضة</b></div>
+    <div class="result"><span>قرار النظام</span><b id="riskRule">مسموح</b></div></div>
+  </div></section>
+
+  <section id="analysis" class="section"><div class="card"><h3>تقييم الصفقة قبل الدخول</h3>
+    <div class="form-grid">
+      <div><label>الأصل</label><select id="asset"><option>XAU/USD</option><option>EUR/USD</option><option>GBP/USD</option><option>NVDA</option><option>AAPL</option></select></div>
+      <div><label>نوع الصفقة</label><select id="side"><option>شراء</option><option>بيع</option></select></div>
+      <div><label>نقطة الدخول</label><input id="entry" type="number" step="0.0001"></div>
+      <div><label>وقف الخسارة</label><input id="sl" type="number" step="0.0001"></div>
+      <div><label>الهدف</label><input id="tp" type="number" step="0.0001"></div>
+      <div><label>هل يوجد خبر قوي؟</label><select id="news"><option value="no">لا</option><option value="yes">نعم</option></select></div>
+    </div><button class="btn btn-primary" style="margin-top:14px" onclick="evaluateTrade()">تقييم الصفقة</button>
+    <div id="signal" class="card signal"><h3>أدخلي البيانات</h3><p class="muted">سيعرض النظام نسبة العائد إلى المخاطرة والقرار المبدئي.</p></div>
+  </div></section>
+
+  <section id="journal" class="section">
+    <div class="card"><h3>إضافة صفقة</h3><div class="form-grid">
+      <div><label>الأصل</label><input id="jAsset" placeholder="مثال: XAU/USD"></div>
+      <div><label>المنصة</label><select id="jBroker"><option>Fiper cTrader</option><option>Exness MT5</option><option>XTB</option></select></div>
+      <div><label>النتيجة بالدولار</label><input id="jPL" type="number" step="0.01"></div>
+      <div><label>الحالة</label><select id="jOutcome"><option>رابحة</option><option>خاسرة</option><option>تعادل</option></select></div>
+    </div><label style="margin-top:12px">ملاحظات</label><textarea id="jNotes" placeholder="سبب الدخول، سبب الخروج، الدرس المستفاد"></textarea>
+    <button class="btn btn-primary" onclick="addTrade()">حفظ الصفقة</button></div>
+    <div class="card" style="margin-top:15px"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="btn btn-soft" onclick="exportCSV()">تصدير CSV</button><button class="btn btn-danger" onclick="clearTrades()">مسح السجل</button></div>
+      <div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>الأصل</th><th>المنصة</th><th>النتيجة</th><th>الحالة</th><th>ملاحظات</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="accounts" class="section"><div class="grid">
+    <div class="card large"><h3>ربط الحسابات</h3><p class="muted">هذه النسخة تعرض حالة الربط فقط. الربط الحقيقي يحتاج خادمًا آمنًا وتسجيل تطبيق لدى cTrader أو تشغيل MT5 على Windows/VPS.</p>
+      <div class="accounts"><div class="account"><b>cTrader</b><p class="muted">OAuth + Open API</p><button class="btn btn-soft" onclick="alert('سيتم تفعيله في مرحلة الربط الحقيقي بصلاحية قراءة فقط.')">ربط لاحقًا</button></div>
+      <div class="account"><b>Exness MT5</b><p class="muted">MT5 + Python/VPS</p><button class="btn btn-soft" onclick="alert('سيتم تفعيله بعد تجهيز الخادم وMT5.')">ربط لاحقًا</button></div>
+      <div class="account"><b>XTB</b><p class="muted">إدخال يدوي</p><button class="btn btn-soft" onclick="alert('المتابعة اليدوية متاحة من خلال سجل الصفقات.')">تعليمات</button></div></div>
+    </div>
+    <div class="card sidecard"><h3>أمان الحساب</h3><p class="muted">لا تحفظي كلمة مرور الوسيط داخل المشروع.</p><p class="muted">استخدمي صلاحيات قراءة فقط متى كانت متاحة.</p><p class="muted">فعّلي التحقق بخطوتين في حسابات التداول والبريد.</p></div>
+  </div></section>
+
+  <div class="footer">NESTORA AI Trader v1.0 — أداة مساعدة تعليمية، ولا تضمن الربح ولا تنفذ صفقات آليًا.</div>
+</main>
+</div>
+<script>
+const KEY='nestora_v1_trades';
+function go(id,btn){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');if(btn){document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}}
+function calcRisk(){let b=Math.max(0,+balance.value||0),r=Math.max(0,+riskPct.value||0),s=Math.max(1,+stopPips.value||1),p=Math.max(.01,+pipValue.value||.01),loss=b*r/100,lot=loss/(s*p);maxLoss.textContent='$'+loss.toFixed(2);lotSize.textContent=lot.toFixed(2)+' لوت';riskClass.textContent=r<=.5?'منخفضة':r<=1?'معتدلة':r<=2?'مرتفعة':'مرتفعة جدًا';riskRule.textContent=r<=.5?'مسموح':r<=1?'بحذر':'مرفوض'}
+function evaluateTrade(){let e=+entry.value,s=+sl.value,t=+tp.value,n=news.value,dir=side.value;if(!e||!s||!t){signal.className='card signal bad';signal.innerHTML='<h3>بيانات ناقصة</h3><p class="muted">أدخلي الدخول والوقف والهدف.</p>';return}let risk=Math.abs(e-s),reward=Math.abs(t-e),rr=reward/risk,valid=dir==='شراء'?(s<e&&t>e):(s>e&&t<e),title,cls='',reason;if(!valid){title='رفض الصفقة';cls='bad';reason='اتجاه الهدف أو الوقف غير صحيح.'}else if(n==='yes'){title='انتظار';cls='bad';reason='يوجد خبر قوي قريب.'}else if(rr<1.5){title='رفض الصفقة';cls='bad';reason='نسبة العائد إلى المخاطرة أقل من 1.5.'}else if(rr<2){title='دراسة بحذر';reason='النسبة مقبولة لكنها ليست مثالية.'}else{title='صفقة قابلة للدراسة';cls='good';reason='النسبة جيدة مع ضرورة تأكيد الاتجاه والخبر.'}signal.className='card signal '+cls;signal.innerHTML=`<h3>${title}</h3><p><b>العائد إلى المخاطرة:</b> 1 : ${rr.toFixed(2)}</p><p class="muted">${reason}</p>`}
+function getTrades(){return JSON.parse(localStorage.getItem(KEY)||'[]')}
+function saveTrades(d){localStorage.setItem(KEY,JSON.stringify(d));render()}
+function addTrade(){let a=jAsset.value.trim();if(!a){alert('أدخلي اسم الأصل');return}let d=getTrades();d.unshift({date:new Date().toLocaleDateString('ar-OM'),asset:a,broker:jBroker.value,pl:+jPL.value||0,outcome:jOutcome.value,notes:jNotes.value.trim()});saveTrades(d);jAsset.value='';jPL.value='';jNotes.value=''}
+function render(){let d=getTrades();rows.innerHTML=d.length?d.map(x=>`<tr><td>${x.date}</td><td>${x.asset}</td><td>${x.broker}</td><td>${x.pl.toFixed(2)}$</td><td>${x.outcome}</td><td>${x.notes||'-'}</td></tr>`).join(''):'<tr><td colspan="6" class="muted">لا توجد صفقات مسجلة بعد.</td></tr>';let total=d.reduce((a,x)=>a+x.pl,0),wins=d.filter(x=>x.outcome==='رابحة').length;kCount.textContent=d.length;kPL.textContent=(total>=0?'+':'')+'$'+total.toFixed(2);kWin.textContent=d.length?Math.round(wins/d.length*100)+'%':'0%'}
+function clearTrades(){if(confirm('مسح جميع الصفقات؟'))saveTrades([])}
+function exportCSV(){let d=getTrades();if(!d.length){alert('لا توجد بيانات');return}let r=[['التاريخ','الأصل','المنصة','النتيجة','الحالة','الملاحظات'],...d.map(x=>[x.date,x.asset,x.broker,x.pl,x.outcome,x.notes])],csv='\ufeff'+r.map(a=>a.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='nestora-trading-journal.csv';a.click();URL.revokeObjectURL(u)}
+calcRisk();render();
+</script>
+</body></html>
